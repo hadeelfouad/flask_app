@@ -1,5 +1,6 @@
 import json
 import logging
+import time
 
 import paho.mqtt.client as mqtt
 
@@ -13,6 +14,7 @@ class VerneConsumer:
         client = mqtt.Client()
         client.on_message = VerneConsumer.on_message
         try:
+            time.sleep(5)
             client.connect(host, port, keep_alive)
             client.subscribe(topic)
             client.loop_start()

@@ -34,7 +34,7 @@ if __name__ == '__main__':
         port=int(os.environ.get("MQTT_PORT", 1883)),
         topic=os.environ.get("MQTT_TOPIC", "thndr-trading")
     )
-    app.run(debug=bool(os.environ.get("DEBUG_MODE", False)))
+    app.run(host="0.0.0.0", debug=bool(os.environ.get("DEBUG_MODE", False)))
     if bool(os.environ.get("POPULATE_DB", False)):
         from populator import populate
         populate()

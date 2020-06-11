@@ -74,6 +74,8 @@ class TradeController:
         try:
             body, user, stock = TradeController._validate_trade_constraints(
                 request)
+            if stock["availability"] < body["total"]:
+                return jsonify(error="insufficient number of stocks. Number of available stock is {}".format(stock["availability"])), 400
             trade_price = int(stock["price"] * body["total"])
             if user.amount < trade_price:
                 return jsonify(error="insufficient user amount. Required amount {} while user amount is {}".format(trade_price, user.amount)), 400
