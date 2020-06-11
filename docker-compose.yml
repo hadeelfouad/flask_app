@@ -44,12 +44,12 @@ services:
         ports:
             - 5000:5000
         environment:
-            - DB_URL=postgresql://admin:admin@postgres_db/thndr
-            - MQTT_HOST=vernemq
-            - MQTT_PORT=1883
-            - MQTT_TOPIC=thndr-trading
-            - POPULATE_DB=True
-            - DEBUG_MODE=False
+            - DB_URL: postgresql://admin:admin@postgres_db/thndr
+            - MQTT_HOST: vernemq
+            - MQTT_PORT: 1883
+            - MQTT_TOPIC: thndr-trading
+            - POPULATE_DB: True
+            - DEBUG_MODE: False
         depends_on:
             - postgres_db
             - vernemq

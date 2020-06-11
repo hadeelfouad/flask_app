@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM python:3.6-slim
 COPY . /thndr-app
 WORKDIR /thndr-app
 RUN python3 -m pip install --user -r requirements.txt

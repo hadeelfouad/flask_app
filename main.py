@@ -33,7 +33,7 @@ def handle_error(e):
 
 if __name__ == '__main__':
     VerneConsumer(
-        host=os.environ.get("MQTT_HOST", "27.0.0.1"),
+        host=os.environ.get("MQTT_HOST", "127.0.0.1"),
         port=os.environ.get("MQTT_PORT", 1883),
         topic=os.environ.get("MQTT_TOPIC", "thndr-trading")
     )
