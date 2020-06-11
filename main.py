@@ -7,6 +7,7 @@ from werkzeug.exceptions import HTTPException
 from consumers import VerneConsumer
 from controllers import controller
 from database_config import Base, engine
+from populator import populate
 
 logging.basicConfig(
     format='%(asctime)s:%(levelname)s:%(message)s', level=logging.ERROR)
@@ -15,6 +16,7 @@ app = Flask(__name__)
 app.register_blueprint(controller)
 try:
     Base.metadata.create_all(engine)
+    populate()
 except Exception:
     logging.error("Error while conecting to DB")
     raise
@@ -34,7 +36,6 @@ if __name__ == '__main__':
         port=int(os.environ.get("MQTT_PORT", 1883)),
         topic=os.environ.get("MQTT_TOPIC", "thndr-trading")
     )
-    app.run(host="0.0.0.0", debug=bool(os.environ.get("DEBUG_MODE", "False")))
-    if bool(os.environ.get("POPULATE_DB", "True")):
-        from populator import populate
-        populate()
+    app.run(host="0.0.0.0", debug=False)
+        
+        

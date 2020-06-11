@@ -48,8 +48,6 @@ services:
             MQTT_HOST: vernemq
             MQTT_PORT: 1883
             MQTT_TOPIC: thndr-trading
-            POPULATE_DB: 'True'
-            DEBUG_MODE: 'False'
         depends_on:
             - postgres_db
             - vernemq
