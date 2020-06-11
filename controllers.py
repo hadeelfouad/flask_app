@@ -71,6 +71,15 @@ class TradeController:
 
     @controller.route("/buy", methods=["POST"])
     def buy():
+        """
+        in order for the user to be able to buy stock the following must be satisified:
+        - user exists
+        - stock exists
+        - stock price is between upper and lower bound
+        - the user has an amount equal to or greater than the total price
+        - the number of stock available is greater than or equal to the total number of stock a user want to buy
+        once all of the above is satisified the user amount is decremented and a new trade record is created to represent a buy 
+        """
         try:
             body, user, stock = TradeController._validate_trade_constraints(
                 request)
@@ -96,6 +105,14 @@ class TradeController:
 
     @controller.route("/sell", methods=["POST"])
     def sell():
+        """
+        in order for the user to be able to sell stock the following must be satisified:
+        - user exists
+        - stock exists
+        - stock price is between upper and lower bound
+        - the user holds stocks equal to or greater than the number of stocks he wants to sell
+        once all of the above is satisified the user amount is incremented and a new trade record is created with a negative total to represent a sell 
+        """
         try:
             body, user, stock = TradeController._validate_trade_constraints(
                 request)
