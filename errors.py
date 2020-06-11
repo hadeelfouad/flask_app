@@ -1,5 +1,10 @@
+class StockNotFoundError(Exception):
+    def __init__(self, message="stock not found"):
+        self.message = message
+        super().__init__(message)
 
-class MQTTConnectionError(Exception):
 
-    def __init__(self, message="Failed to connect to MQTT server"):
+class TradeConstraintError(Exception):
+    def __init__(self, message):
+        self.message = message
         super().__init__(message)

@@ -38,5 +38,21 @@ services:
         depends_on:
             - postgres_db
 
+    thndr-app:
+        image: thndr-app
+        restart: always
+        ports:
+            - 5000:5000
+        environment:
+            - DB_URL=postgresql://admin:admin@postgres_db/thndr
+            - MQTT_HOST=vernemq
+            - MQTT_PORT=1883
+            - MQTT_TOPIC=thndr-trading
+            - POPULATE_DB=True
+            - DEBUG_MODE=False
+        depends_on:
+            - postgres_db
+            - vernemq
+
 
 

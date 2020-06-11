@@ -3,8 +3,6 @@ import logging
 
 import paho.mqtt.client as mqtt
 
-from errors import MQTTConnectionError
-
 logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.INFO)
 stocks = {}
 
@@ -18,18 +16,11 @@ class VerneConsumer:
             client.connect(host, port, keep_alive)
             client.subscribe(topic)
             client.loop_start()
-        except ConnectionRefusedError as e:
-            logging.error("Failed to connect to server with error: {}".format(repr(e)))
-            raise MQTTConnectionError()
+        except Exception as e:
+            logging.error("Failed to connect to Mqtt server")
+            raise
 
     @staticmethod
     def on_message(client, userdata, msg):
         stock = json.loads(msg.payload)
         stocks[stock['stock_id']] = stock
-
-
-# if __name__ == "__main__":
-#     client = VerneConsumer(host="10.118.244.251", topic="thndr-trading")
-#     i = 0
-#     while True:
-#         i += 1
