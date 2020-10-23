@@ -22,7 +22,7 @@ except Exception:
     raise
 
 
-app.errorhandler(Exception)
+@app.errorhandler(Exception)
 def handle_error(e):
     code = 500
     if isinstance(e, HTTPException):
